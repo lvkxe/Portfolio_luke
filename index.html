@@ -162,18 +162,62 @@
     </div>
     <br>
     <br>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="display-3 font-weight-bold">Hobbies</h2> <!-- Made bold -->
-                <div class="style-container">
-                    <p>
-                        Driving, Sketching, Photography, Watching movies
-                    </p>
+    <!-- Hobbies Section -->
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h2 class="display-3 font-weight-bold">Hobbies</h2> <!-- Made bold -->
+            <div class="style-container">
+                <p>
+                    Driving, Sketching, Photography
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <!-- Hobby Photocard 1 -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="img1/Driving.jpg" class="card-img-top hobby-img" alt="Driving Hobby">
+                <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Driving</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Hobby Photocard 2 -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="img1/Sketching.jpg" class="card-img-top hobby-img" alt="Sketching Hobby">
+                <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Sketching</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Hobby Photocard 3 -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="img1/Photography.jpg" class="card-img-top hobby-img" alt="Photography Hobby">
+                <div class="card-body text-center">
+                    <h5 class="card-title font-weight-bold">Photography</h5>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<style>
+    .hobby-img {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+    .card-title {
+        font-weight: bold;
+        color: #000;
+    }
+</style>
+
     <style>
         /* General Section Styles */
         #about-me {
@@ -289,18 +333,24 @@
 
 
 <!-- Contact Section -->
-<section id="contact" style="background-color: #000000; color: #ffffff;"> <!-- Set background to true black -->
+<section id="contact" style="background-color: #000000; color: #ffffff;"> 
     <div class="container">
         <div class="row">
             <div class="col text-center">
-                <h2 class="display-4 font-weight-bold">Contact</h2> <!-- Made the heading bold -->
+                <h2 class="display-4 font-weight-bold">Contact</h2>
                 <p class="lead">Feel free to reach out to me at <a href="mailto:lukefong2006@gmail.com" class="text-white">lukefong2006@gmail.com</a> or follow me on social media!</p>
+                
                 <!-- Social Media Icons -->
                 <div class="social-icons d-flex justify-content-center">
                     <a href="https://www.facebook.com/luke.fong.39" class="fa fa-facebook"></a>
                     <a href="https://www.linkedin.com/in/luke-fong-3539a7272" class="fa fa-linkedin"></a>
                     <a href="https://www.instagram.com/lv.kxe/" class="fa fa-instagram"></a>
                 </div>
+                <br></br>
+                <!-- Resume Download Button -->
+                <a href="img1/Resume.pdf" class="btn btn-light btn-lg mt-4" download>
+                    Download My Resume
+                </a>
             </div>
         </div>
     </div>
