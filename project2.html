@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adobe Illustrator Project</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9fb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: #222;
+      text-align: center;
+      margin: 30px 0 10px 0;
+    }
+
+    p.description {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    .back-button {
+      margin: 20px auto;
+      padding: 12px 24px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .back-button i {
+      font-size: 1.2rem;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .image-container {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    .lightbox p {
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .close-lightbox, .prev, .next {
+      position: absolute;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .close-lightbox {
+      top: 20px;
+      right: 30px;
+    }
+
+    .prev {
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+    }
+
+    .next {
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="back-button" onclick="window.history.back();">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </button>
+
+  <h1>Adobe Illustrator Project</h1>
+
+  <p class="description">
+    This Illustrator project is a collection of the stuff I really enjoyed working on. It includes my personal website design, a set of fun chat stickers (featuring frogs and cats), and a name card I designed for myself. I wanted the whole thing to reflect my personality and design style, so I kept it playful and creative. From sketching the characters to putting everything together in a cohesive look, this project was a great way for me to explore illustration and layout design in a way that feels uniquely mine.
+  </p>
+
+  <div class="image-grid" id="gallery">
+    <!-- Images will be injected here -->
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-desc"></p>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </div>
+
+  <script>
+    const images = [
+      { src: 'img/1.jpg', desc: 'Home page' },
+      { src: 'img/2.jpg', desc: 'Portfolio page' },
+      { src: 'img/3.jpg', desc: 'About me page' },
+      { src: 'img/4.jpg', desc: 'Contact page' },
+      { src: 'img/5.jpg', desc: 'Cat and Frog chat stickers' },
+      { src: 'img/6.jpg', desc: 'Frog themed stickers' },
+      { src: 'img/Namecard1.jpg', desc: 'Namecard' }
+    ];
+
+    const gallery = document.getElementById('gallery');
+    let currentIndex = 0;
+
+    images.forEach((image, index) => {
+      const div = document.createElement('div');
+      div.className = 'image-container';
+      div.innerHTML = `<img src="${image.src}" alt="Adobe Illustrator Project ${index + 1}" onclick="openLightbox(${index})">`;
+      gallery.appendChild(div);
+    });
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightbox').style.display = 'flex';
+      updateLightbox();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      document.getElementById('lightbox-img').src = images[currentIndex].src;
+      document.getElementById('lightbox-desc').textContent = images[currentIndex].desc;
+    }
+  </script>
+
+</body>
+</html>
