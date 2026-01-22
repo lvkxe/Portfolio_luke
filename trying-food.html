@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trying Food Hobby</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+    margin: 30px 0 10px 0;
+  }
+
+  p.description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+    font-size: 1.1rem;
+  }
+
+  .back-button {
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .back-button i {
+    font-size: 1.2rem;
+  }
+
+  .back-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust column size */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .image-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 300px; /* Fixed height for consistency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%; /* Ensure images fill the container */
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+  }
+
+  /* Title and Description Centering for Each Food Section */
+  .food-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .food-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .food-description {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .lightbox p {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 80%;
+  }
+
+  .close-lightbox, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .close-lightbox {
+    top: 20px;
+    right: 30px;
+  }
+
+  .prev {
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+  }
+
+  .next {
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+  }
+  </style>
+</head>
+
+<body>
+
+  <button class="back-button" onclick="window.history.back();">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </button>
+
+  <h1>Trying Food Hobby</h1>
+
+  <p class="description">
+    A collection of delicious food I have tried during my travels and daily life. From sushi to street food, each experience was memorable and exciting.
+  </p>
+
+  <!-- Food Section: Taiwan Food -->
+  <div class="food-section">
+    <h2 class="food-title">Taiwan Food</h2>
+    <p class="food-description">Trying some street foods in Taiwan was an unforgettable experience. From stinky tofu to bubble tea, each dish was a delightful adventure.</p>
+    <div class="image-grid" id="taiwan-food-gallery">
+      <!-- Taiwan Food Images will be added here -->
+      <div class="image-container" onclick="openLightbox(0, 'taiwanfood')">
+        <img src="img7/TaiwanFood1.jpg" alt="Taiwan Food 1">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'taiwanfood')">
+        <img src="img7/TaiwanFood2.jpg" alt="Taiwan Food 2">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'taiwanfood')">
+        <img src="img7/TaiwanFood3.jpg" alt="Taiwan Food 3">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'taiwanfood')">
+        <img src="img7/TaiwanFood4.jpg" alt="Taiwan Food 4">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'taiwanfood')">
+        <img src="img7/TaiwanFood5.jpg" alt="Taiwan Food 5">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'taiwanfood')">
+        <img src="img7/TaiwanFood6.jpg" alt="Taiwan Food 6">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'taiwanfood')">
+        <img src="img7/TaiwanFood7.jpg" alt="Taiwan Food 7">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'taiwanfood')">
+        <img src="img7/TaiwanFood8.jpg" alt="Taiwan Food 8">
+      </div>
+    </div>
+  </div>
+
+  <!--Food Section: Kuala Lumpur Food-->
+  <div class="food-section">
+    <h2 class="food-title">Kuala Lumpur Food</h2>
+    <p class="food-description">Exploring the diverse culinary landscape of Kuala Lumpur was a delightful experience.</p>
+    <div class="image-grid" id="kuala-lumpur-food-gallery">
+      <!-- Kuala Lumpur Food Images will be added here -->
+      <div class="image-container" onclick="openLightbox(0, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood1.jpg" alt="Kuala Lumpur Food 1">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood2.jpg" alt="Kuala Lumpur Food 2">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood3.jpg" alt="Kuala Lumpur Food 3">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood4.jpg" alt="Kuala Lumpur Food 4">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood5.jpg" alt="Kuala Lumpur Food 5">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood6.jpg" alt="Kuala Lumpur Food 6">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'kualalumpurfood')">
+        <img src="img7/KualaLumpurFood7.jpg" alt="Kuala Lumpur Food 7">
+  </div>
+</div>
+
+  <!-- Food Section: Melbourne Food-->
+  <div class="food-section">
+    <h2 class="food-title">Melbourne Food</h2>
+    <p class="food-description">Melbourne's food scene is a melting pot of cultures, offering a wide array of flavors and dishes.</p>
+    <div class="image-grid" id="melbourne-food-gallery">
+      <div class="image-container" onclick="openLightbox(0, 'melbournefood')">
+        <img src="img8/MelbourneFood1.jpg" alt="Melbourne Food 1">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'melbournefood')">
+        <img src="img8/MelbourneFood2.jpg" alt="Melbourne Food 2">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'melbournefood')">
+        <img src="img8/MelbourneFood3.jpg" alt="Melbourne Food 3">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'melbournefood')">
+        <img src="img8/MelbourneFood4.jpg" alt="Melbourne Food 4">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'melbournefood')">
+        <img src="img8/MelbourneFood5.jpg" alt="Melbourne Food 5">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'melbournefood')">
+        <img src="img8/MelbourneFood6.jpg" alt="Melbourne Food 6">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'melbournefood')">
+        <img src="img8/MelbourneFood7.jpg" alt="Melbourne Food 7">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'melbournefood')">
+        <img src="img8/MelbourneFood8.jpg" alt="Melbourne Food 8">
+      </div>
+    </div>
+  </div>
+
+  <!--Food Section: Thailand Food-->
+  <div class="food-section">
+    <h2 class="food-title">Thailand Food</h2>
+    <p class="food-description">Thailand offers a vibrant food culture with a variety of flavors, from spicy curries to sweet desserts.</p>
+    <div class="image-grid" id="thailand-food-gallery">
+      <!-- Thailand Food Images will be added here -->
+      <div class="image-container" onclick="openLightbox(0, 'thailandfood')">
+        <img src="img8/ThailandFood1.jpg" alt="Thailand Food 1">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'thailandfood')">
+        <img src="img8/ThailandFood2.jpg" alt="Thailand Food 2">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'thailandfood')">
+        <img src="img8/ThailandFood3.jpg" alt="Thailand Food 3">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'thailandfood')">
+        <img src="img8/ThailandFood4.jpg" alt="Thailand Food 4">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'thailandfood')">
+        <img src="img8/ThailandFood5.jpg" alt="Thailand Food 5">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'thailandfood')">
+        <img src="img8/ThailandFood6.jpg" alt="Thailand Food 6">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'thailandfood')">
+        <img src="img8/ThailandFood7.jpg" alt="Thailand Food 7">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'thailandfood')">
+        <img src="img8/ThailandFood8.jpg" alt="Thailand Food 8">
+      </div>
+    </div>
+
+  
+  <!-- More Food Sections (Street Food, Desserts, etc.) -->
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-desc"></p>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </div>
+
+  <script>
+    // Define the images for Taiwan Food
+    const foodImages = {
+      taiwanfood: [
+        { src: 'img7/TaiwanFood1.jpg'},
+        { src: 'img7/TaiwanFood2.jpg'},
+        { src: 'img7/TaiwanFood3.jpg'},
+        { src: 'img7/TaiwanFood4.jpg'},
+        { src: 'img7/TaiwanFood5.jpg'},
+        { src: 'img7/TaiwanFood6.jpg'},
+        { src: 'img7/TaiwanFood7.jpg'},
+        { src: 'img7/TaiwanFood8.jpg'}
+      ],
+      kualalumpurfood: [
+        { src: 'img7/KualaLumpurFood1.jpg'},
+        { src: 'img7/KualaLumpurFood2.jpg'},
+        { src: 'img7/KualaLumpurFood3.jpg'},
+        { src: 'img7/KualaLumpurFood4.jpg'},
+        { src: 'img7/KualaLumpurFood5.jpg'},
+        { src: 'img7/KualaLumpurFood6.jpg'},
+        { src: 'img7/KualaLumpurFood7.jpg'}
+      ],
+      melbournefood: [
+        { src: 'img8/MelbourneFood1.jpg'},
+        { src: 'img8/MelbourneFood2.jpg'},
+        { src: 'img8/MelbourneFood3.jpg'},
+        { src: 'img8/MelbourneFood4.jpg'},
+        { src: 'img8/MelbourneFood5.jpg'},
+        { src: 'img8/MelbourneFood6.jpg'},
+        { src: 'img8/MelbourneFood7.jpg'},
+        { src: 'img8/MelbourneFood8.jpg'}
+      ],
+      thailandfood: [
+        { src: 'img8/ThailandFood1.jpg'},
+        { src: 'img8/ThailandFood2.jpg'},
+        { src: 'img8/ThailandFood3.jpg'},
+        { src: 'img8/ThailandFood4.jpg'},
+        { src: 'img8/ThailandFood5.jpg'},
+        { src: 'img8/ThailandFood6.jpg'},
+        { src: 'img8/ThailandFood7.jpg'},
+        { src: 'img8/ThailandFood8.jpg'}
+      ]
+    };
+
+    let currentIndex = 0;
+    let currentFood = '';
+
+    // Open the lightbox with the selected image
+    function openLightbox(index, food) {
+      currentIndex = index;
+      currentFood = food;
+      document.getElementById('lightbox').style.display = 'flex';
+      updateLightbox();
+    }
+
+    // Close the lightbox
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Change the image in the lightbox
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = foodImages[currentFood].length - 1;
+      if (currentIndex >= foodImages[currentFood].length) currentIndex = 0;
+      updateLightbox();
+    }
+
+    // Update the lightbox with the current image and description
+    function updateLightbox() {
+      document.getElementById('lightbox-img').src = foodImages[currentFood][currentIndex].src;
+      document.getElementById('lightbox-desc').textContent = foodImages[currentFood][currentIndex].desc;
+    }
+  </script>
+
+</body>
+</html>

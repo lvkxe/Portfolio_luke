@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travelling Hobby</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+    margin: 30px 0 10px 0;
+  }
+
+  p.description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+    font-size: 1.1rem;
+  }
+
+  .back-button {
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .back-button i {
+    font-size: 1.2rem;
+  }
+
+  .back-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust column size */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .image-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 300px; /* Fixed height for consistency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%; /* Ensure images fill the container */
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+  }
+
+  /* Title and Description Centering for Each Trip */
+  .trip-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .trip-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .trip-description {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .lightbox p {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 80%;
+  }
+
+  .close-lightbox, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .close-lightbox {
+    top: 20px;
+    right: 30px;
+  }
+
+  .prev {
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+  }
+
+  .next {
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+  }
+  </style>
+</head>
+
+<body>
+
+  <button class="back-button" onclick="window.history.back();">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </button>
+
+  <h1>Travelling Hobby</h1>
+
+  <p class="description">
+    A collection of my travel experiences captured through photography. These images reflect the different places I have visited and the incredible adventures I have had since 2023.
+  </p>
+
+  <!-- Trip 1: Phuket -->
+  <div class="trip-section">
+    <h2 class="trip-title">Phuket</h2>
+    <p class="trip-description">A beach lover's paradise, Phuket offers breathtaking views, crystal-clear water, and exciting activities.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'phuket')">
+        <img src="img3/Phuket1.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'phuket')">
+        <img src="img3/Phuket2.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'phuket')">
+        <img src="img3/Phuket3.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'phuket')">
+        <img src="img3/Phuket4.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'phuket')">
+        <img src="img3/Phuket5.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'phuket')">
+        <img src="img3/Phuket6.jpg" alt="Phuket">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'phuket')">
+        <img src="img3/Phuket7.jpg" alt="Phuket">
+    </div>
+  </div>
+
+  <!-- Trip 2: Beijing -->
+  <div class="trip-section">
+    <h2 class="trip-title">Beijing</h2>
+    <p class="trip-description">A trip to China’s capital, full of rich history, culture, and the majestic Great Wall of China.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'beijing')">
+        <img src="img3/Beijing1.jpg" alt="Great Wall of China">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'beijing')">
+        <img src="img3/Beijing2.jpg" alt="Forbidden City">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'beijing')">
+        <img src="img3/Beijing3.jpg" alt="Temple of Heaven">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'beijing')">
+        <img src="img3/Beijing4.jpg" alt="Summer Palace">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'beijing')">
+        <img src="img3/Beijing5.jpg" alt="Beijing National Stadium">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'beijing')">
+        <img src="img3/Beijing6.jpg" alt="Beijing National Stadium">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'beijing')">
+        <img src="img3/Beijing7.jpg" alt="Beijing National Stadium">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'beijing')">
+        <img src="img3/Beijing8.jpg" alt="Beijing National Stadium">
+    </div>
+  </div>
+
+  <!--Trip 3: Shanghai-->
+  <div class="trip-section">
+    <h2 class="trip-title">Shanghai</h2>
+    <p class="trip-description">A bustling metropolis that blends modernity with tradition, Shanghai is a city of contrasts and vibrant energy.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'shanghai')">
+        <img src="img4/Shanghai1.jpg" alt="The Bund">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'shanghai')">
+        <img src="img4/Shanghai2.jpg" alt="Oriental Pearl Tower">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'shanghai')">
+        <img src="img4/Shanghai3.jpg" alt="Yu Garden">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'shanghai')">
+        <img src="img4/Shanghai4.jpg" alt="Nanjing Road">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'shanghai')">
+        <img src="img4/Shanghai5.jpg" alt="Shanghai Skyline">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'shanghai')">
+        <img src="img4/Shanghai6.jpg" alt="Jin Mao Tower">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'shanghai')">
+        <img src="img4/Shanghai7.jpg" alt="Shanghai Tower">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'shanghai')">
+        <img src="img4/Shanghai8.jpg" alt="Shanghai Night View">
+    </div>
+</div>
+<!--Trip 4: Bangkok-->
+<div class="trip-section">
+    <h2 class="trip-title">Bangkok</h2>
+    <p class="trip-description">A city that never sleeps, Bangkok is known for its vibrant street life, cultural landmarks, and bustling markets.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'bangkok')">
+        <img src="img4/Bangkok1.jpg" alt="Grand Palace">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'bangkok')">
+        <img src="img4/Bangkok2.jpg" alt="Wat Arun">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'bangkok')">
+        <img src="img4/Bangkok3.jpg" alt="Floating Market">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'bangkok')">
+        <img src="img4/Bangkok4.jpg" alt="Chatuchak Market">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'bangkok')">
+        <img src="img4/Bangkok5.jpg" alt="Khao San Road">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'bangkok')">
+        <img src="img4/Bangkok6.jpg" alt="Lumphini Park">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'bangkok')">
+        <img src="img4/Bangkok7.jpg" alt="Siam Paragon">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'bangkok')">
+        <img src="img4/Bangkok8.jpg" alt="Bangkok Nightlife">
+    </div>
+</div>
+
+<!--Trip 5: Taipei-->
+<div class="trip-section">
+    <h2 class="trip-title">Taipei</h2>
+    <p class="trip-description">A vibrant city known for its lively street food scene, night markets, and iconic Taipei 101 skyscraper.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'taipei')">
+        <img src="img5/Taipei1.jpg" alt="Taipei 101">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'taipei')">
+        <img src="img5/Taipei2.jpg" alt="Shilin Night Market">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'taipei')">
+        <img src="img5/Taipei3.jpg" alt="Chiang Kai-shek Memorial Hall">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'taipei')">
+        <img src="img5/Taipei4.jpg" alt="Longshan Temple">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'taipei')">
+        <img src="img5/Taipei5.jpg" alt="Elephant Mountain">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'taipei')">
+        <img src="img5/Taipei6.jpg" alt="National Palace Museum">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'taipei')">
+        <img src="img5/Taipei7.jpg" alt="Raohe Street Night Market">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'taipei')">
+        <img src="img5/Taipei8.jpg" alt="Taipei Night View">
+    </div>
+  </div>
+
+<!--Trip 6: Melbourne-->
+<div class="trip-section">
+    <h2 class="trip-title">Melbourne</h2>
+    <p class="trip-description">A cultural hub known for its arts scene, coffee culture, and beautiful coastal scenery.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'melbourne')">
+        <img src="img6/Melbourne1.jpg" alt="Federation Square">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'melbourne')">
+        <img src="img6/Melbourne2.jpg" alt="Royal Botanic Gardens">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'melbourne')">
+        <img src="img6/Melbourne3.jpg" alt="St Kilda Beach">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'melbourne')">
+        <img src="img6/Melbourne4.jpg" alt="Melbourne Skyline">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'melbourne')">
+        <img src="img6/Melbourne5.jpg" alt="Queen Victoria Market">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'melbourne')">
+        <img src="img6/Melbourne6.jpg" alt="Yarra River">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'melbourne')">
+        <img src="img6/Melbourne7.jpg" alt="Hosier Lane Street Art">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'melbourne')">
+        <img src="img6/Melbourne8.jpg" alt="Melbourne Night View">
+    </div>
+  </div>
+
+<!--Trip 7: Bali-->
+<div class="trip-section">
+    <h2 class="trip-title">Bali</h2>
+    <p class="trip-description">An Indonesian paradise known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'bali')">
+        <img src="img5/Bali1.jpg" alt="Uluwatu Temple">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'bali')">
+        <img src="img5/Bali2.jpg" alt="Tegallalang Rice Terraces">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'bali')">
+        <img src="img5/Bali3.jpg" alt="Mount Batur">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'bali')">
+        <img src="img5/Bali4.jpg" alt="Seminyak Beach">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'bali')">
+        <img src="img5/Bali5.jpg" alt="Ubud Monkey Forest">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'bali')">
+        <img src="img5/Bali6.jpg" alt="Nusa Penida">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'bali')">
+        <img src="img5/Bali7.jpg" alt="Bali Sunset">
+      </div>
+</div>
+
+<!--Trip 8: Kuala Lumpur-->
+<div class="trip-section">
+    <h2 class="trip-title">Kuala Lumpur</h2>
+    <p class="trip-description">The vibrant capital of Malaysia, known for its modern skyline dominated by the iconic Petronas Twin Towers.</p>
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox(0, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur1.jpg" alt="Petronas Twin Towers">
+      </div>
+      <div class="image-container" onclick="openLightbox(1, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur2.jpg" alt="Batu Caves">
+      </div>
+      <div class="image-container" onclick="openLightbox(2, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur3.jpg" alt="Merdeka Square">
+      </div>
+      <div class="image-container" onclick="openLightbox(3, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur4.jpg" alt="Bukit Bintang">
+      </div>
+      <div class="image-container" onclick="openLightbox(4, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur5.jpg" alt="KL Tower">
+      </div>
+      <div class="image-container" onclick="openLightbox(5, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur6.jpg" alt="Chinatown Kuala Lumpur">
+      </div>
+      <div class="image-container" onclick="openLightbox(6, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur7.jpg" alt="Islamic Arts Museum Malaysia">
+      </div>
+      <div class="image-container" onclick="openLightbox(7, 'kuala_lumpur')">
+        <img src="img6/KualaLumpur8.jpg" alt="Kuala Lumpur Night View">
+      </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-desc"></p>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </div>
+
+  <script>
+    // Define the images for each trip
+    const trips = {
+      phuket: [
+        { src: 'img3/Phuket1.jpg'},
+        { src: 'img3/Phuket2.jpg'},
+        { src: 'img3/Phuket3.jpg'},
+        { src: 'img3/Phuket4.jpg'},
+        { src: 'img3/Phuket5.jpg'},
+        { src: 'img3/Phuket6.jpg'},
+        { src: 'img3/Phuket7.jpg'}
+      ],
+      beijing: [
+        { src: 'img3/Beijing1.jpg'},
+        { src: 'img3/Beijing2.jpg'},
+        { src: 'img3/Beijing3.jpg'},
+        { src: 'img3/Beijing4.jpg'},
+        { src: 'img3/Beijing5.jpg'},
+        { src: 'img3/Beijing6.jpg'},
+        { src: 'img3/Beijing7.jpg'},
+        { src: 'img3/Beijing8.jpg'}
+      ],
+      shanghai: [
+        { src: 'img4/Shanghai1.jpg'},
+        { src: 'img4/Shanghai2.jpg'},
+        { src: 'img4/Shanghai3.jpg'},
+        { src: 'img4/Shanghai4.jpg'},
+        { src: 'img4/Shanghai5.jpg'},
+        { src: 'img4/Shanghai6.jpg'},
+        { src: 'img4/Shanghai7.jpg'},
+        { src: 'img4/Shanghai8.jpg'}
+      ],
+      bangkok: [
+        { src: 'img4/Bangkok1.jpg'},
+        { src: 'img4/Bangkok2.jpg'},
+        { src: 'img4/Bangkok3.jpg'},
+        { src: 'img4/Bangkok4.jpg'},
+        { src: 'img4/Bangkok5.jpg'},
+        { src: 'img4/Bangkok6.jpg'},
+        { src: 'img4/Bangkok7.jpg'},
+        { src: 'img4/Bangkok8.jpg'}
+      ],
+      taipei: [
+        { src: 'img5/Taipei1.jpg'},
+        { src: 'img5/Taipei2.jpg'},
+        { src: 'img5/Taipei3.jpg'},
+        { src: 'img5/Taipei4.jpg'},
+        { src: 'img5/Taipei5.jpg'},
+        { src: 'img5/Taipei6.jpg'},
+        { src: 'img5/Taipei7.jpg'},
+        { src: 'img5/Taipei8.jpg'}
+      ],
+      melbourne: [
+        { src: 'img6/Melbourne1.jpg'},
+        { src: 'img6/Melbourne2.jpg'},
+        { src: 'img6/Melbourne3.jpg'},
+        { src: 'img6/Melbourne4.jpg'},
+        { src: 'img6/Melbourne5.jpg'},
+        { src: 'img6/Melbourne6.jpg'},
+        { src: 'img6/Melbourne7.jpg'},
+        { src: 'img6/Melbourne8.jpg'}
+      ],
+      bali: [
+        { src: 'img5/Bali1.jpg'},
+        { src: 'img5/Bali2.jpg'},
+        { src: 'img5/Bali3.jpg'},
+        { src: 'img5/Bali4.jpg'},
+        { src: 'img5/Bali5.jpg'},
+        { src: 'img5/Bali6.jpg'},
+        { src: 'img5/Bali7.jpg'}
+      ],
+      kuala_lumpur: [
+        { src: 'img6/KualaLumpur1.jpg'},
+        { src: 'img6/KualaLumpur2.jpg'},
+        { src: 'img6/KualaLumpur3.jpg'},
+        { src: 'img6/KualaLumpur4.jpg'},
+        { src: 'img6/KualaLumpur5.jpg'},
+        { src: 'img6/KualaLumpur6.jpg'},
+        { src: 'img6/KualaLumpur7.jpg'},
+        { src: 'img6/KualaLumpur8.jpg'}
+      ]
+
+
+
+      // Add the rest of the trips (Shanghai, Bangkok, etc.)
+    };
+
+    let currentIndex = 0;
+    let currentTrip = '';
+
+    // Open the lightbox with the selected image
+    function openLightbox(index, trip) {
+      currentIndex = index;
+      currentTrip = trip;
+      document.getElementById('lightbox').style.display = 'flex';
+      updateLightbox();
+    }
+
+    // Close the lightbox
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Change the image in the lightbox
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = trips[currentTrip].length - 1;
+      if (currentIndex >= trips[currentTrip].length) currentIndex = 0;
+      updateLightbox();
+    }
+
+    // Update the lightbox with the current image and description
+    function updateLightbox() {
+      document.getElementById('lightbox-img').src = trips[currentTrip][currentIndex].src;
+      document.getElementById('lightbox-desc').textContent = trips[currentTrip][currentIndex].desc;
+    }
+  </script>
+
+</body>
+</html>

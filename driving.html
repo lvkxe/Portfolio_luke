@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driving Hobby</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+    margin: 30px 0 10px 0;
+  }
+
+  p.description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: #555;
+    font-size: 1.1rem;
+  }
+
+  .back-button {
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .back-button i {
+    font-size: 1.2rem;
+  }
+
+  .back-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust column size */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .image-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 300px; /* Fixed height for consistency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%; /* Ensure images fill the container */
+    object-fit: cover; /* Maintain aspect ratio while covering the container */
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .lightbox p {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 80%;
+  }
+
+  .close-lightbox, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .close-lightbox {
+    top: 20px;
+    right: 30px;
+  }
+
+  .prev {
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+  }
+
+  .next {
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+  }
+</style>
+</head>
+
+<body>
+
+  <button class="back-button" onclick="window.history.back();">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </button>
+
+  <h1>Driving Hobby</h1>
+
+  <p class="description">
+    A collection of driving-related pictures I captured on my travels and adventures. These images reflect my love for the road and the thrill of the journey.
+  </p>
+
+  <div class="image-grid" id="gallery">
+    <!-- Images will be injected here -->
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-desc"></p>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </div>
+
+  <script>
+    // Define the images and descriptions for the driving hobby
+    const images = [
+      { src: 'img2/Driving Lesson.jpg', desc: 'One of the first few driving lessons' },
+      { src: 'img2/First Drive after pass.jpg', desc: 'This was the first drive after passing my Traffic Police Test, was so happy that day' },
+      { src: 'img2/Tried driving to malaysia with my dad.jpg', desc: 'A memorable trip driving to JB for the first time with my dad' },
+      { src: 'img2/Malaysia.jpg', desc: 'Driving back from JB to Singapore' },
+      { src: 'img2/GOR Drive.jpg', desc: 'I drove in Australia for the first time to Great Ocean Road' },
+      { src: 'img2/Great ocean.jpg', desc: 'Amazing view when we got to the Great Ocean Road' },
+      { src: 'img2/KL.jpg', desc: 'Drove to Kuala Lumpur with my family, short getaway road trip' }
+    ];
+
+    // Get the container where the images will be displayed
+    const gallery = document.getElementById('gallery');
+    let currentIndex = 0;
+
+    // Loop through the images array and create HTML for each image
+    images.forEach((image, index) => {
+      const div = document.createElement('div');
+      div.className = 'image-container';
+      div.innerHTML = `<img src="${image.src}" alt="${image.desc}" onclick="openLightbox(${index})">`;
+      gallery.appendChild(div); // Add the image container to the grid
+    });
+
+    // Open the lightbox
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById('lightbox').style.display = 'flex';
+      updateLightbox();
+    }
+
+    // Close the lightbox
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Change the image in the lightbox
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      updateLightbox();
+    }
+
+    // Update the lightbox with the current image and description
+    function updateLightbox() {
+      document.getElementById('lightbox-img').src = images[currentIndex].src;
+      document.getElementById('lightbox-desc').textContent = images[currentIndex].desc;
+    }
+  </script>
+
+</body>
+</html>
