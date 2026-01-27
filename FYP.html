@@ -1,0 +1,513 @@
+<!-- FYP.html (matches namecard.html theme + same lightbox style) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Year Project (FYP) | FixMyRP - RP Campus Care</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Anek Bangla', sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Back button */
+    .back-button {
+      margin: 24px auto 10px;
+      padding: 12px 22px;
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      font-weight: 800;
+      text-align: center;
+      margin: 18px 0 6px;
+    }
+
+    p.description {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 26px;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      padding: 0 14px;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin: 50px 0 20px;
+      text-align: center;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px 50px;
+    }
+
+    /* Pills */
+    .pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 34px;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    /* Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #1a1a1a, #141414);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+    }
+
+    .card p, .card li {
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      font-size: 1rem;
+    }
+
+    .card ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 16px 0;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      background: rgba(255,255,255,0.9);
+      color: #0b0b0b;
+      transition: all 0.2s ease;
+    }
+
+    .btn-link:hover {
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* Gallery */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .image-container {
+      background: #141414;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .image-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .image-container p {
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .lightbox img {
+      max-width: 92%;
+      max-height: 80%;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lightbox p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.15rem;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .close-lightbox, .prev, .next {
+      position: absolute;
+      color: #fff;
+      font-size: 2rem;
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .close-lightbox { top: 20px; right: 30px; }
+    .prev { top: 50%; left: 30px; transform: translateY(-50%); }
+    .next { top: 50%; right: 30px; transform: translateY(-50%); }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="back-button" onclick="window.history.back();">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </button>
+
+  <h1>Final Year Project (FYP) — FixMyRP (RP Campus Care)</h1>
+
+  <p class="description">
+    FixMyRP is a facilities reporting app designed for Republic Polytechnic students and staff to quickly report faulty campus facilities with photos and descriptions, track report progress, and receive status update notifications.
+  </p>
+
+  <div class="pill-wrap">
+    <span class="pill">UI/UX</span>
+    <span class="pill">React Native</span>
+    <span class="pill">MongoDB</span>
+    <span class="pill">Reporting + Tracking</span>
+    <span class="pill">Admin Panel</span>
+  </div>
+
+  <div class="content">
+
+    <h2>Project Overview</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Business Issue</h3>
+        <p>
+          Students and staff often encounter faulty facilities on campus with no easy way to report them.
+          Existing reporting methods (emails/verbal) are inefficient and lack transparency, so issues can be delayed or go unresolved.
+        </p>
+        <div class="divider"></div>
+        <h3>What FixMyRP Does</h3>
+        <ul>
+          <li>Submit facility reports with a photo + description</li>
+          <li>Track report status from submission to resolution</li>
+          <li>Receive status updates via notifications</li>
+          <li>Admins can filter and update reports for faster handling</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>What Sets FixMyRP Apart</h3>
+        <ul>
+          <li><b>Tailored for internal school use</b> (not public infrastructure / emergencies)</li>
+          <li><b>Custom report categories</b> like Canteen, TRCC, Library, etc.</li>
+          <li><b>Simple student-friendly UI</b> with minimal steps</li>
+          <li>Improves transparency, speed, and user communication</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3>Product Goal</h3>
+        <p>
+          Provide an efficient and user-friendly platform for RP students and staff to report faulty facilities,
+          streamline reporting with real-time tracking, and improve response time and communication with maintenance teams.
+        </p>
+      </div>
+    </div>
+
+    <h2>Project Details</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Team</h3>
+        <p style="margin:0;">
+          Pann Lee • Lin Nixuan • Marissa • Fong Ting Feng Luke • Ng Shi Qi
+        </p>
+        <div class="divider"></div>
+        <h3>Role</h3>
+        <p style="margin:0;">
+          UI/UX Design + Front-end + Back-end + Integration support
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Tools Used</h3>
+        <div class="pill-wrap" style="justify-content:flex-start; margin: 8px 0 0 0; padding: 0;">
+          <span class="pill">Figma</span>
+          <span class="pill">React Native</span>
+          <span class="pill">Expo Go</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">JavaScript</span>
+        </div>
+
+        <div class="btn-row">
+          <!-- Update these links if needed -->
+          <a class="btn-link" href="https://bit.ly/FixMyRP" target="_blank" rel="noopener">
+            <i class="fa-solid fa-mobile-screen"></i> Open Demo (Expo)
+          </a>
+          <a class="btn-link btn-outline" href="https://www.figma.com/design/hZKHjk3mO9bZjbHkpZZ0a3/FYP?node-id=0-1" target="_blank" rel="noopener">
+            <i class="fa-brands fa-figma"></i> View Figma
+          </a>
+          <a class="btn-link btn-outline" href="https://www.behance.net/moodboard/219508631/Facility-Reporting" target="_blank" rel="noopener">
+            <i class="fa-solid fa-palette"></i> View Moodboard
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h2>Requirements</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Functional Requirements</h3>
+        <ul>
+          <li>Secure login for students & staff</li>
+          <li>Submit facility reports (image, location, description)</li>
+          <li>View own submitted reports</li>
+          <li>Admin can view, filter, and update reports</li>
+          <li>Edit profile information (user/admin)</li>
+          <li>Receive notifications (e.g., status updates)</li>
+          <li>Submit feedback to improve the app</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Non-Functional Requirements</h3>
+        <ul>
+          <li>Mobile-first responsive experience</li>
+          <li>React Native front-end + MongoDB backend</li>
+          <li>Secure storage of data</li>
+          <li>Easy navigation following good UI/UX practices</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Process</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>1) Research</h3>
+        <p>
+          Identified the campus reporting pain points (no tracking, delays, lack of transparency) and defined what an effective reporting system needs.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>2) Ideation</h3>
+        <p>
+          Created early ideas (logo sketches, moodboard), then mapped the reporting flow and feature list for student + admin use cases.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>3) Design</h3>
+        <p>
+          Built low-fidelity and high-fidelity wireframes in Figma, including UI kit components and page flow.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>4) Build / Test</h3>
+        <p>
+          Implemented the app (React Native + MongoDB), tested on devices via Expo Go, and iterated based on issues found.
+        </p>
+      </div>
+    </div>
+
+    <h2>Accessing FixMyRP (Mobile Demo)</h2>
+    <div class="card">
+      <ul style="margin-top:0;">
+        <li>Step 1: Download <b>Expo Go</b></li>
+        <li>Step 2: Open this link: <b>https://bit.ly/FixMyRP</b></li>
+        <li>Step 3: Tap <b>Open</b> in Expo Go</li>
+      </ul>
+    </div>
+
+    <h2>Challenges & Improvements</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Challenges Encountered</h3>
+        <ul>
+          <li>Android build opened inconsistently due to unsigned build restrictions</li>
+          <li>iOS build limited without a paid Apple Developer account</li>
+          <li>Early coordination challenges aligning schedules and sprint tasks</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Recommendations (Next Improvements)</h3>
+        <ul>
+          <li>Notification toggle (opt in/out)</li>
+          <li>Smart location selection (auto-detect + dropdown)</li>
+          <li>Multilingual support</li>
+          <li>Image annotation (mark issues on photo)</li>
+          <li>Enhanced image quality for clearer identification</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <p class="description" style="margin-bottom: 10px;">
+    </p>
+
+    <div class="image-grid">
+      <div class="image-container" onclick="openLightbox('img9/GroupPic.jpg')">
+        <img src="img9/GroupPic.jpg" alt="FYP Screenshot 1">
+        <p>Our Weekly Meetups</p>
+      </div>
+
+      <div class="image-container" onclick="openLightbox('img9/work.jpg')">
+        <img src="img9/work.jpg" alt="FYP Screenshot 2">
+        <p>Testing codes using Expo Go</p>
+      </div>
+
+      <div class="image-container" onclick="openLightbox('img9/Mongo.jpg')">
+        <img src="img9/Mongo.jpg" alt="FYP Screenshot 3">
+        <p>MongoDB Database</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © <span id="year"></span> — Portfolio
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-desc"></p>
+    <span class="next" onclick="changeImage(1)">&#10095;</span>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Gallery list for lightbox next/prev
+    const galleryItems = [
+      { src: 'img9/GroupPic.jpg', desc: 'Our Weekly Meetups' },
+      { src: 'img9/work.jpg', desc: 'Testing codes using Expo Go' },
+      { src: 'img9/Mongo.jpg', desc: 'MongoDB Database' }
+    ];
+
+    let currentIndex = 0;
+
+    function openLightbox(src, description) {
+      currentIndex = galleryItems.findIndex(item => item.src === src);
+      if (currentIndex === -1) currentIndex = 0;
+
+      document.getElementById('lightbox').style.display = 'flex';
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-desc').textContent = description;
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = galleryItems.length - 1;
+      if (currentIndex >= galleryItems.length) currentIndex = 0;
+
+      document.getElementById('lightbox-img').src = galleryItems[currentIndex].src;
+      document.getElementById('lightbox-desc').textContent = galleryItems[currentIndex].desc;
+    }
+  </script>
+
+</body>
+</html>
