@@ -164,6 +164,31 @@
       background: rgba(255,255,255,0.12);
     }
 
+    /* ✅ Video (9:16 Shorts) */
+    .video-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 177.78%; /* 9:16 ratio */
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.45);
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* Gallery */
     .image-grid {
       display: grid;
@@ -241,13 +266,6 @@
     .close-lightbox { top: 20px; right: 30px; }
     .prev { top: 50%; left: 30px; transform: translateY(-50%); }
     .next { top: 50%; right: 30px; transform: translateY(-50%); }
-
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
-    }
   </style>
 </head>
 
@@ -335,7 +353,6 @@
         </div>
 
         <div class="btn-row">
-          <!-- Update these links if needed -->
           <a class="btn-link" href="https://bit.ly/FixMyRP" target="_blank" rel="noopener">
             <i class="fa-solid fa-mobile-screen"></i> Open Demo (Expo)
           </a>
@@ -438,9 +455,25 @@
       </div>
     </div>
 
-    <h2>Gallery</h2>
+    <!-- Video Demo -->
+    <h2>App Demo</h2>
     <p class="description" style="margin-bottom: 10px;">
+      Short walkthrough of FixMyRP showing the reporting and tracking flow.
     </p>
+
+    <div class="video-wrap">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/QK2KAD7NpZY"
+          title="FixMyRP Demo Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <h2>Gallery</h2>
+    <p class="description" style="margin-bottom: 10px;"></p>
 
     <div class="image-grid">
       <div class="image-container" onclick="openLightbox('img9/GroupPic.jpg')">
@@ -448,19 +481,18 @@
         <p>Our Weekly Meetups</p>
       </div>
 
-      <div class="image-container" onclick="openLightbox('img9/work.jpg')">
+      <div class="image-container" onclick="openLightbox('img9/work.jpg', 'Testing codes using Expo Go')">
         <img src="img9/work.jpg" alt="FYP Screenshot 2">
         <p>Testing codes using Expo Go</p>
       </div>
 
-      <div class="image-container" onclick="openLightbox('img9/Mongo.jpg')">
+      <div class="image-container" onclick="openLightbox('img9/Mongo.jpg', 'MongoDB Database')">
         <img src="img9/Mongo.jpg" alt="FYP Screenshot 3">
         <p>MongoDB Database</p>
       </div>
     </div>
 
   </div>
-
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
@@ -472,8 +504,6 @@
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
     // Gallery list for lightbox next/prev
     const galleryItems = [
       { src: 'img9/GroupPic.jpg', desc: 'Our Weekly Meetups' },
@@ -489,7 +519,8 @@
 
       document.getElementById('lightbox').style.display = 'flex';
       document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-desc').textContent = description;
+      document.getElementById('lightbox-desc').textContent =
+        description || galleryItems[currentIndex].desc;
     }
 
     function closeLightbox() {
