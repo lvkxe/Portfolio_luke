@@ -5,170 +5,240 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travelling Hobby</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Font (match FYP) -->
+  <link href="https://fonts.googleapis.com/css?family=Anek+Bangla" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f9f9fb;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
+    body {
+      font-family: "Anek Bangla", sans-serif;
+      font-size: 20px;
+      background-color: #0b0b0b;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
 
-  h1 {
-    font-weight: 700;
-    color: #222;
-    text-align: center;
-    margin: 30px 0 10px 0;
-  }
+    h1 {
+      font-weight: 800;
+      text-align: center;
+      margin: 30px 0 10px 0;
+      letter-spacing: 0.3px;
+    }
 
-  p.description {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-    color: #555;
-    font-size: 1.1rem;
-  }
+    p.description {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      padding: 0 16px;
+    }
 
-  .back-button {
-    margin: 20px auto;
-    padding: 12px 24px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    font-weight: 500;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-    transition: all 0.3s ease;
-  }
+    /* Back button -> ghost style */
+    .back-button {
+      margin: 20px auto;
+      padding: 12px 22px;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+      transition: all 0.2s ease;
+    }
 
-  .back-button i {
-    font-size: 1.2rem;
-  }
+    .back-button i {
+      font-size: 1.1rem;
+    }
 
-  .back-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
-  }
+    .back-button:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
 
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust column size */
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+    /* Info cards section (like driving.html) */
+    .info-section {
+      padding: 10px 20px 40px;
+    }
 
-  .image-container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    height: 300px; /* Fixed height for consistency */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    .info-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
 
-  .image-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
+    .info-card {
+      background: linear-gradient(180deg, #1b1b1b, #151515);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+    }
 
-  .image-container img {
-    width: 100%;
-    height: 100%; /* Ensure images fill the container */
-    object-fit: cover; /* Maintain aspect ratio while covering the container */
-  }
+    .info-card h2 {
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: #fff;
+    }
 
-  /* Title and Description Centering for Each Trip */
-  .trip-section {
-    text-align: center;
-    margin-bottom: 40px;
-  }
+    .info-card p,
+    .info-card li {
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
 
-  .trip-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-  }
+    .info-card ul {
+      padding-left: 20px;
+      margin: 0;
+    }
 
-  .trip-description {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-    color: #555;
-  }
+    /* Trip section styling (themed) */
+    .trip-section {
+      text-align: center;
+      margin: 0 auto 45px auto;
+      padding: 0 16px;
+    }
 
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-  }
+    .trip-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 30px 0 10px 0;
+      color: #fff;
+    }
 
-  .lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
+    .trip-description {
+      font-size: 1.15rem;
+      max-width: 900px;
+      margin: 0 auto 22px auto;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+    }
 
-  .lightbox p {
-    color: white;
-    font-size: 1.2rem;
-    text-align: center;
-    max-width: 80%;
-  }
+    /* Gallery grid (same layout, themed) */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-  .close-lightbox, .prev, .next {
-    position: absolute;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-decoration: none;
-    background: rgba(0,0,0,0.5);
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    user-select: none;
-  }
+    .image-container {
+      background-color: #1a1a1a;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .close-lightbox {
-    top: 20px;
-    right: 30px;
-  }
+    .image-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    }
 
-  .prev {
-    top: 50%;
-    left: 30px;
-    transform: translateY(-50%);
-  }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
 
-  .next {
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-  }
+    .image-container:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Lightbox (same behavior, themed) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    .lightbox img {
+      max-width: 92%;
+      max-height: 78%;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    }
+
+    .lightbox p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.15rem;
+      text-align: center;
+      max-width: 900px;
+      line-height: 1.5;
+      padding: 0 18px;
+    }
+
+    .close-lightbox, .prev, .next {
+      position: absolute;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .close-lightbox:hover, .prev:hover, .next:hover {
+      background: rgba(255,255,255,0.14);
+      transform: scale(1.03);
+    }
+
+    .close-lightbox {
+      top: 20px;
+      right: 22px;
+    }
+
+    .prev {
+      top: 50%;
+      left: 22px;
+      transform: translateY(-50%);
+    }
+
+    .next {
+      top: 50%;
+      right: 22px;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 900px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .trip-title { font-size: 2rem; }
+    }
   </style>
 </head>
 
@@ -184,6 +254,35 @@
     A collection of my travel experiences captured through photography. These images reflect the different places I have visited and the incredible adventures I have had since 2023.
   </p>
 
+  <!-- INFO CARDS (like driving.html) -->
+  <section class="info-section">
+    <div class="info-grid">
+
+      <div class="info-card">
+        <h2>Why I Enjoy Travelling</h2>
+        <p>
+          Travelling lets me experience different cultures, environments, and ways of life. It helps me reset, gain new perspectives,
+          and collect memories through places and moments that feel completely different from everyday routine.
+        </p>
+        <p>
+          I enjoy exploring cities and nature, taking photos, and learning something new from each destination — even small details like
+          food, architecture, and local lifestyle.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h2>What I Like</h2>
+        <ul>
+          <li>Exploring new places</li>
+          <li>Capturing photos & scenery</li>
+          <li>Trying local food</li>
+          <li>Culture & city vibes</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Trip 1: Phuket -->
   <div class="trip-section">
     <h2 class="trip-title">Phuket</h2>
@@ -198,17 +297,18 @@
       <div class="image-container" onclick="openLightbox(2, 'phuket')">
         <img src="img3/Phuket3.jpg" alt="Phuket">
       </div>
-      <div class="image-container" onclick="openLightbox(2, 'phuket')">
+      <div class="image-container" onclick="openLightbox(3, 'phuket')">
         <img src="img3/Phuket4.jpg" alt="Phuket">
       </div>
-      <div class="image-container" onclick="openLightbox(3, 'phuket')">
+      <div class="image-container" onclick="openLightbox(4, 'phuket')">
         <img src="img3/Phuket5.jpg" alt="Phuket">
       </div>
-      <div class="image-container" onclick="openLightbox(4, 'phuket')">
+      <div class="image-container" onclick="openLightbox(5, 'phuket')">
         <img src="img3/Phuket6.jpg" alt="Phuket">
       </div>
-      <div class="image-container" onclick="openLightbox(5, 'phuket')">
+      <div class="image-container" onclick="openLightbox(6, 'phuket')">
         <img src="img3/Phuket7.jpg" alt="Phuket">
+      </div>
     </div>
   </div>
 
@@ -240,6 +340,7 @@
       </div>
       <div class="image-container" onclick="openLightbox(7, 'beijing')">
         <img src="img3/Beijing8.jpg" alt="Beijing National Stadium">
+      </div>
     </div>
   </div>
 
@@ -271,10 +372,12 @@
       </div>
       <div class="image-container" onclick="openLightbox(7, 'shanghai')">
         <img src="img4/Shanghai8.jpg" alt="Shanghai Night View">
+      </div>
     </div>
-</div>
-<!--Trip 4: Bangkok-->
-<div class="trip-section">
+  </div>
+
+  <!--Trip 4: Bangkok-->
+  <div class="trip-section">
     <h2 class="trip-title">Bangkok</h2>
     <p class="trip-description">A city that never sleeps, Bangkok is known for its vibrant street life, cultural landmarks, and bustling markets.</p>
     <div class="image-grid">
@@ -301,11 +404,12 @@
       </div>
       <div class="image-container" onclick="openLightbox(7, 'bangkok')">
         <img src="img4/Bangkok8.jpg" alt="Bangkok Nightlife">
+      </div>
     </div>
-</div>
+  </div>
 
-<!--Trip 5: Taipei-->
-<div class="trip-section">
+  <!--Trip 5: Taipei-->
+  <div class="trip-section">
     <h2 class="trip-title">Taipei</h2>
     <p class="trip-description">A vibrant city known for its lively street food scene, night markets, and iconic Taipei 101 skyscraper.</p>
     <div class="image-grid">
@@ -332,11 +436,12 @@
       </div>
       <div class="image-container" onclick="openLightbox(7, 'taipei')">
         <img src="img5/Taipei8.jpg" alt="Taipei Night View">
+      </div>
     </div>
   </div>
 
-<!--Trip 6: Melbourne-->
-<div class="trip-section">
+  <!--Trip 6: Melbourne-->
+  <div class="trip-section">
     <h2 class="trip-title">Melbourne</h2>
     <p class="trip-description">A cultural hub known for its arts scene, coffee culture, and beautiful coastal scenery.</p>
     <div class="image-grid">
@@ -363,11 +468,12 @@
       </div>
       <div class="image-container" onclick="openLightbox(7, 'melbourne')">
         <img src="img6/Melbourne8.jpg" alt="Melbourne Night View">
+      </div>
     </div>
   </div>
 
-<!--Trip 7: Bali-->
-<div class="trip-section">
+  <!--Trip 7: Bali-->
+  <div class="trip-section">
     <h2 class="trip-title">Bali</h2>
     <p class="trip-description">An Indonesian paradise known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.</p>
     <div class="image-grid">
@@ -392,10 +498,11 @@
       <div class="image-container" onclick="openLightbox(6, 'bali')">
         <img src="img5/Bali7.jpg" alt="Bali Sunset">
       </div>
-</div>
+    </div>
+  </div>
 
-<!--Trip 8: Kuala Lumpur-->
-<div class="trip-section">
+  <!--Trip 8: Kuala Lumpur-->
+  <div class="trip-section">
     <h2 class="trip-title">Kuala Lumpur</h2>
     <p class="trip-description">The vibrant capital of Malaysia, known for its modern skyline dominated by the iconic Petronas Twin Towers.</p>
     <div class="image-grid">
@@ -423,6 +530,7 @@
       <div class="image-container" onclick="openLightbox(7, 'kuala_lumpur')">
         <img src="img6/KualaLumpur8.jpg" alt="Kuala Lumpur Night View">
       </div>
+    </div>
   </div>
 
   <!-- Lightbox -->
@@ -515,10 +623,6 @@
         { src: 'img6/KualaLumpur7.jpg'},
         { src: 'img6/KualaLumpur8.jpg'}
       ]
-
-
-
-      // Add the rest of the trips (Shanghai, Bangkok, etc.)
     };
 
     let currentIndex = 0;
