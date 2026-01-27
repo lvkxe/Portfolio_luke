@@ -5,59 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adobe Illustrator Project</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Font (match FYP theme) -->
+  <link href="https://fonts.googleapis.com/css?family=Anek+Bangla" rel="stylesheet">
 
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f9f9fb;
-      color: #333;
+      font-family: "Anek Bangla", sans-serif;
+      font-size: 20px;
+      background-color: #0b0b0b;
+      color: #ffffff;
       margin: 0;
       padding: 0;
     }
 
     h1 {
-      font-weight: 700;
-      color: #222;
+      font-weight: 800;
+      color: #fff;
       text-align: center;
       margin: 30px 0 10px 0;
+      letter-spacing: 0.3px;
     }
 
     p.description {
       text-align: center;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto 30px auto;
-      color: #555;
+      color: rgba(255,255,255,0.7);
       font-size: 1.1rem;
+      line-height: 1.6;
+      padding: 0 16px;
     }
 
+    /* Back button -> ghost style like FYP */
     .back-button {
       margin: 20px auto;
-      padding: 12px 24px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 30px;
+      padding: 12px 22px;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 1rem;
-      font-weight: 500;
-      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-      transition: all 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+      transition: all 0.2s ease;
     }
 
     .back-button i {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     .back-button:hover {
-      background-color: #0056b3;
+      background: rgba(255,255,255,0.08);
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
     }
 
     .image-grid {
@@ -66,30 +73,39 @@
       gap: 20px;
       padding: 20px;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 50px;
     }
 
     .image-container {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(180deg, #1b1b1b, #151515);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
     }
 
     .image-container:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
     }
 
     .image-container img {
       width: 100%;
-      height: auto;
+      height: 220px;
+      object-fit: cover;
       display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: transform 0.2s ease;
     }
 
-    /* Lightbox */
+    .image-container:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Lightbox (same functions, themed) */
     .lightbox {
       display: none;
       position: fixed;
@@ -97,25 +113,30 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.92);
       justify-content: center;
       align-items: center;
       flex-direction: column;
       padding: 20px;
+      backdrop-filter: blur(2px);
     }
 
     .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      margin-bottom: 20px;
-      border-radius: 10px;
+      max-width: 92%;
+      max-height: 78%;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
     }
 
     .lightbox p {
-      color: white;
-      font-size: 1.2rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 1.15rem;
       text-align: center;
-      max-width: 80%;
+      max-width: 900px;
+      line-height: 1.5;
+      padding: 0 18px;
     }
 
     .close-lightbox, .prev, .next {
@@ -124,27 +145,34 @@
       font-size: 2rem;
       font-weight: bold;
       text-decoration: none;
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 14px;
+      border-radius: 999px;
       cursor: pointer;
       user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .close-lightbox:hover, .prev:hover, .next:hover {
+      background: rgba(255,255,255,0.14);
+      transform: scale(1.03);
     }
 
     .close-lightbox {
-      top: 20px;
-      right: 30px;
+      top: 18px;
+      right: 18px;
     }
 
     .prev {
       top: 50%;
-      left: 30px;
+      left: 18px;
       transform: translateY(-50%);
     }
 
     .next {
       top: 50%;
-      right: 30px;
+      right: 18px;
       transform: translateY(-50%);
     }
   </style>
