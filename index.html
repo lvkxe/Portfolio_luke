@@ -220,6 +220,17 @@
         font-weight: bold;
         color: #000;
     }
+    /* Remove blue underline from hobby cards (links) */
+    #about-me a.card,
+    #about-me a.card:hover,
+    #about-me a.card:focus,
+    #about-me a.card:active {
+    text-decoration: none !important;
+    }
+
+    #about-me a.card * {
+    text-decoration: none !important; /* removes underline from text inside */
+    }
 </style>
 
     <style>
